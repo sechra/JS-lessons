@@ -1,66 +1,106 @@
-console.log('Request data...')
+// // const animal = {
+// //     name: 'Animal',
+// //     age: 5,c
+// //     hasTail: true 
+// // }
 
-// setTimeout(() => {
-//     console.log('Preparing data...')
+// class Animal {
 
-//     const backendData = {
-//         server: 'aws',
-//         port: 2000,
-//         status: 'working'
+// static type = 'ANIMAL'
+
+//     constructor(options) {
+//         this.name = options.name
+//         this.age = options.age
+//         this.hasTail = options.hasTail
+
 //     }
 
-//     setTimeout(() => {
-//         backendData.modified = true
-//         console.log('Data received', backendData)
-//     })
-// }, 2000)
+//     voice() {
+//         console.log('I am animal!')
+//     }
+// }
 
-// const p = new Promise(function(resolve, reject) {
-// setTimeout(() => {
+// // const animal = new Animal({
+// //     name: 'Animal',
+// //     age: 5,
+// //     hasTail: true
+// // })
 
-//     console.log('Preparing data...')
+// class Cat extends Animal{
+//     static type = 'CAT'
 
-//     const backendData = {
-//                 server: 'aws',
-//                 port: 2000,
-//                 status: 'working'
-//             }
-//             resolve(backendData)
-// }, 2000)
+//     constructor(options) {
+//         super(options)
+//         this.color = options.color
+//     }
+
+//     voice() {
+//         super.voice()
+//         console.log('I am cat')
+//     }
+
+//     get ageInfo() {
+//         return this.age * 7
+//     }
+
+//     set ageInfo(newAge) {
+//         this.age = newAge
+//     }
+// }
+
+// const cat = new Cat({
+//     name: 'Cat',
+//     age: 7,
+//     hasTail: true,
+//     color: 'black'
 // })
 
-// p.then(data => {
-//     return new Promise((resolve, reject) => {
-//         setTimeout(() => {
-//             data.modofied = true
-//             resolve(data)
-            
-//         }, 2000)
+class Component {
+    constructor(selector) {
+        this.$el = document.querySelector(selector)
+    }
 
-        
-//     })
-   
-// }).then(clientData => {
-//     console.log('Data received', clientData)
-// })
-// .catch(err => console.error('Error: ', err))
-// .finally(() => console.log('Finally'))
+    hide() {
+            this.$el.style.display = 'none'
+    }
 
-const sleep = ms => {
-    return new Promise(resolve => {
-        setTimeout(() => resolve(), ms)
-    })
+    show() {
+            this.$el.style.display = 'block'
+    }
 }
 
-// sleep(2000).then(() => console.log('After 2 sec'))
-// sleep(3000).then(() => console.log('After 2 sec'))
+class Box extends Component {
+    constructor(options) {
+super(options.selector)
 
-Promise.all([sleep(2000), sleep(4000)])
-.then (() => {
-    console.log('All prom')
+this.$el.style.width = this.$el.style.height = options.size + 'px'
+this.$el.style.background = options.color
+    }
+}
+
+const box1 = new Box({
+    selector: '#box1',
+    size: 100,
+    color: 'red'
+
 })
 
-Promise.race([sleep(2000), sleep(4000)])
-.then(() => {
-    console.log('race')
+const box2 = new Box({
+    selector: '#box2',
+    size: 120,
+    color: 'blue'
+
+})
+
+class Circle extends Box {
+    constructor(options) {
+        super(options)
+        this.$el.style.borderRadius = '50%'
+    }
+}
+
+const c = new Circle({
+    selector: '#circle',
+    size: 90,
+    color: 'green'
 })
