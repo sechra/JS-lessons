@@ -1,106 +1,105 @@
-// // const animal = {
-// //     name: 'Animal',
-// //     age: 5,c
-// //     hasTail: true 
-// // }
-
-// class Animal {
-
-// static type = 'ANIMAL'
-
-//     constructor(options) {
-//         this.name = options.name
-//         this.age = options.age
-//         this.hasTail = options.hasTail
-
-//     }
-
-//     voice() {
-//         console.log('I am animal!')
-//     }
+// const delay = ms => {
+//     return new Promise(r => setTimeout(() => r(), ms))
 // }
 
-// // const animal = new Animal({
-// //     name: 'Animal',
-// //     age: 5,
-// //     hasTail: true
-// // })
+// const url = 'https://jsonplaceholder.typicode.com/todos'
 
-// class Cat extends Animal{
-//     static type = 'CAT'
-
-//     constructor(options) {
-//         super(options)
-//         this.color = options.color
-//     }
-
-//     voice() {
-//         super.voice()
-//         console.log('I am cat')
-//     }
-
-//     get ageInfo() {
-//         return this.age * 7
-//     }
-
-//     set ageInfo(newAge) {
-//         this.age = newAge
-//     }
+// function fetchTodos() {
+//     console.log('fetch todo started...')
+//     return delay(2000).then(() => {
+//         return fetch(url)
+//     }).then(responce => responce.json())
 // }
 
-// const cat = new Cat({
-//     name: 'Cat',
-//     age: 7,
-//     hasTail: true,
-//     color: 'black'
+// fetchTodos()
+// .then(data => {
+//     console.log('Data: ', data)
 // })
+// .catch(e => console.error(e))
 
-class Component {
-    constructor(selector) {
-        this.$el = document.querySelector(selector)
-    }
 
-    hide() {
-            this.$el.style.display = 'none'
-    }
+// async function fetchAsyncTodos() {
+//     console.log('fetch todo started...')
+//     try{
+//         await delay(2000)
+//         const response = await fetch(url)
+//         const data = await response.json()
+//         console.log('Data: ', data)
+//     }
+//     catch(e) {
+// console.error(e)
+//     } finally{
 
-    show() {
-            this.$el.style.display = 'block'
-    }
+//     }
+    
+// }
+
+// fetchAsyncTodos()
+
+const person ={
+    name: 'vlad',
+    age: 25,
+    job: 'fullstack'
 }
 
-class Box extends Component {
-    constructor(options) {
-super(options.selector)
-
-this.$el.style.width = this.$el.style.height = options.size + 'px'
-this.$el.style.background = options.color
+const op = new Proxy(person, {
+    get(target, prop) {
+    //    console.log(`Getting prop ${prop}`)
+       if(!(prop in target)) {
+return prop
+.split('_')
+.map(p => target[p])
+.join(' ')
+       }
+        return target[prop]
+    },
+    set(target, prop, value) {
+        if (prop in target) {
+            target[prop] = value
+        } else {
+            throw new Error(`No ${prop} field in target`)
+        }
+    },
+    has(target, prop) {
+        return ['age', 'name', 'job'].includes(prop)
+    },
+    deleteProperty(target, prop) {
+        console.log('Deleting...', prop)
+        delete target[prop]
+        return true
     }
-}
-
-const box1 = new Box({
-    selector: '#box1',
-    size: 100,
-    color: 'red'
-
 })
 
-const box2 = new Box({
-    selector: '#box2',
-    size: 120,
-    color: 'blue'
 
-})
+const log = text => `Log: ${text}`
 
-class Circle extends Box {
-    constructor(options) {
-        super(options)
-        this.$el.style.borderRadius = '50%'
+const fp = new Proxy(log, {
+    apply(target, thisArg, args) {
+        console.log('Calling fn...')
+        return target.apply(thisArg, args).toUpperCase()
+
     }
-}
+ })
 
-const c = new Circle({
-    selector: '#circle',
-    size: 90,
-    color: 'green'
-})
+
+ class Person {
+    constructor(name, age) {
+        this.name = name
+        this.age = age
+    }
+ }
+
+ const PersonProxy = new Proxy(Person, {
+    construct(target, args) {
+        console.log('Construct...')
+        return new Proxy(new target(...args), {
+            get(t, prop) {
+                console.log(`Getting prop "${prop}"`)
+                return t[prop]
+            }
+        })
+    }
+ })
+
+ const p = new PersonProxy('Maxim', 30)
+
