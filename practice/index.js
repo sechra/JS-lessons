@@ -1,105 +1,77 @@
-// const delay = ms => {
-//     return new Promise(r => setTimeout(() => r(), ms))
+const people = [
+    {name: 'Vlad', age: 25, budget: 40000},
+    {name: 'Elena', age: 17, budget: 3400},
+
+    {name: 'Igor', age: 49, budget: 50000},
+
+    {name: 'Misha', age: 15, budget: 1800},
+
+    {name: 'Vasilisa', age: 24, budget: 25000},
+
+    {name: 'Vika', age: 38, budget: 2300}
+
+]
+
+// for(let i = 0; i < people.length; i++) {
+//     console.log(people[i])
 // }
 
-// const url = 'https://jsonplaceholder.typicode.com/todos'
-
-// function fetchTodos() {
-//     console.log('fetch todo started...')
-//     return delay(2000).then(() => {
-//         return fetch(url)
-//     }).then(responce => responce.json())
+// for (let person of people) {
+//     console.log(person)
 // }
 
-// fetchTodos()
-// .then(data => {
-//     console.log('Data: ', data)
+//ForEach
+// people.forEach(function(person) {
+//     console.log(person)
 // })
-// .catch(e => console.error(e))
 
+// people.forEach(person => console.log(person))
 
-// async function fetchAsyncTodos() {
-//     console.log('fetch todo started...')
-//     try{
-//         await delay(2000)
-//         const response = await fetch(url)
-//         const data = await response.json()
-//         console.log('Data: ', data)
-//     }
-//     catch(e) {
-// console.error(e)
-//     } finally{
+// map
 
-//     }
-    
+// const newPeople = people.map(person => `${person.name} (${person.age})`)
+
+// console.log(newPeople)
+
+// FILTER
+
+// const adults = people.filter(person => person.age >= 18)
+
+// console.log(adults)
+
+// reduce
+
+// let amount = 0
+// for (let i = 0; i < people.length; i++) {
+//     amount += people[i].budget
 // }
+// const amount = people.reduce((total, person) => {
+//     return total + person.budget
+// }, 0)
 
-// fetchAsyncTodos()
 
-const person ={
-    name: 'vlad',
-    age: 25,
-    job: 'fullstack'
-}
+// console.log(amount)
 
-const op = new Proxy(person, {
-    get(target, prop) {
-    //    console.log(`Getting prop ${prop}`)
-       if(!(prop in target)) {
-return prop
-.split('_')
-.map(p => target[p])
-.join(' ')
-       }
-        return target[prop]
-    },
-    set(target, prop, value) {
-        if (prop in target) {
-            target[prop] = value
-        } else {
-            throw new Error(`No ${prop} field in target`)
-        }
-    },
-    has(target, prop) {
-        return ['age', 'name', 'job'].includes(prop)
-    },
-    deleteProperty(target, prop) {
-        console.log('Deleting...', prop)
-        delete target[prop]
-        return true
+// find
+
+// const igor = people.find(person => person.name === 'Vika')
+// console.log(igor)
+
+// // findIndex
+
+// const igorIndex = people.findIndex(person => person.name === 'Vika')
+// console.log(igorIndex)
+
+//===================
+
+const amount = people
+.filter(person => person.budget > 3000)
+.map(person => {
+    return {
+        info: `${person.name} (${person.age})`, 
+        budget: person.budget
     }
 })
+.reduce((total, person) => total + person.budget, 0)
 
-
-const log = text => `Log: ${text}`
-
-const fp = new Proxy(log, {
-    apply(target, thisArg, args) {
-        console.log('Calling fn...')
-        return target.apply(thisArg, args).toUpperCase()
-
-    }
- })
-
-
- class Person {
-    constructor(name, age) {
-        this.name = name
-        this.age = age
-    }
- }
-
- const PersonProxy = new Proxy(Person, {
-    construct(target, args) {
-        console.log('Construct...')
-        return new Proxy(new target(...args), {
-            get(t, prop) {
-                console.log(`Getting prop "${prop}"`)
-                return t[prop]
-            }
-        })
-    }
- })
-
- const p = new PersonProxy('Maxim', 30)
-
+console.log(amount)
