@@ -1,77 +1,154 @@
-const people = [
-    {name: 'Vlad', age: 25, budget: 40000},
-    {name: 'Elena', age: 17, budget: 3400},
+// const obj = {
+//     name: 'Vlad',
+//     age: 26,
+//     job: 'FullStack'
+// }
 
-    {name: 'Igor', age: 49, budget: 50000},
+// const entries = [
+//     ['name', 'Vlad'],
+//     ['age', 26],
+//     ['job', 'FullStack']
+// ]
 
-    {name: 'Misha', age: 15, budget: 1800},
+// // console.log(Object.entries(obj))
+// // console.log(Object.fromEntries(entries))
 
-    {name: 'Vasilisa', age: 24, budget: 25000},
+// const map = new Map(entries)
 
-    {name: 'Vika', age: 38, budget: 2300}
+// map.set('newField', 42)
+// .set(obj, 'Value of object')
+// .set(NaN, 'NaaaaaaaN')
+
+// // 
+
+// // map.delete('job')
+// // console.log(map.has('job'))
+// // console.log(map.size)
+// // map.clear()
+// // console.log(map.size)
+
+// // for(let [key, value] of map) {
+// //     console.log(key, value)
+// // }
+
+// // for (let val of map.values()) {
+// //     console.log(val)
+// // }
+
+
+// // for (let key of map.keys()) {
+// //     console.log(key)
+// // }
+
+// // map.forEach((val, key, m) => {
+// //     console.log(val, key)
+// // })
+
+
+
+// // const array = Array.from(map)
+
+// // const mapObj = Object.fromEntries(map.entries())
+
+// // console.log(mapObj)
+
+// const users = [
+//     {name: 'Elena'},
+//     {name: 'Alex'},
+
+//     {name: 'Iryna'}
+
+// ]
+
+// const visits = new Map()
+
+//  visits
+//  .set(users[0], new Date())
+//  .set(users[1], new Date(new Date().getTime() + 1000 * 60))
+//  .set(users[2], new Date(new Date().getTime() + 5000 * 60))
+
+//  function lastVisit(user) {
+//     return visits.get(user)
+//  }
+
+//  console.log(lastVisit(users[1]))
+
+// const set = new Set([1, 2, 3, 3, 3, 4, 5, 5, 6])
+// set.add(10).add(20).add(30).add(20)
+
+// console.log(set.has(30))
+// console.log(set.size)
+// console.log(set.delete(1))
+// console.log(set.size)
+// console.log(set.clear())
+// console.log(set.size)
+
+// for (let keys of set) {
+//     console.log(key)
+// }
+
+// function uniqValues(array) {
+//     return Array.from(new Set(array))
+// }
+
+// console.log(uniqValues([1, 1, 2, 2, 4, 4, 4, 4, 5, 5, 6, 7]))
+
+
+// let obj = {name: 'weakmap'}
+
+// const arr = [obj]
+
+// obj = null
+// console.log(obj)
+
+// const map = new WeakMap([
+//     [obj, 'obj data']
+// ])
+// obj = null
+
+// const cache = new WeakMap()
+
+// function cacheUser(user) {
+//     if (!cache.has(user)) {
+//         cache.set(user, Date.now())
+//     }
+//     return cache.get(user)
+// }
+
+// let  lena = {name: 'Elena'}
+// let  alex = {name: 'Alex'}
+
+// cacheUser(lena)
+// cacheUser(alex)
+
+// lena = null
+
+// console.log(cache.has(lena))
+// console.log(cache.has(alex))
+
+
+
+//==========================
+
+
+const users = [
+    {name: 'Elena'},
+    {name: 'Alex'},
+    {name: 'Iryna'}
 
 ]
 
-// for(let i = 0; i < people.length; i++) {
-//     console.log(people[i])
-// }
+const visits = new WeakSet()
 
-// for (let person of people) {
-//     console.log(person)
-// }
+visits.add(users[0]).add(users[1])
 
-//ForEach
-// people.forEach(function(person) {
-//     console.log(person)
-// })
+users.splice(1, 1)
 
-// people.forEach(person => console.log(person))
-
-// map
-
-// const newPeople = people.map(person => `${person.name} (${person.age})`)
-
-// console.log(newPeople)
-
-// FILTER
-
-// const adults = people.filter(person => person.age >= 18)
-
-// console.log(adults)
-
-// reduce
-
-// let amount = 0
-// for (let i = 0; i < people.length; i++) {
-//     amount += people[i].budget
-// }
-// const amount = people.reduce((total, person) => {
-//     return total + person.budget
-// }, 0)
+console.log(visits.has(users[0]))
+console.log(visits.has(users[1]))
 
 
-// console.log(amount)
 
-// find
 
-// const igor = people.find(person => person.name === 'Vika')
-// console.log(igor)
 
-// // findIndex
 
-// const igorIndex = people.findIndex(person => person.name === 'Vika')
-// console.log(igorIndex)
-
-//===================
-
-const amount = people
-.filter(person => person.budget > 3000)
-.map(person => {
-    return {
-        info: `${person.name} (${person.age})`, 
-        budget: person.budget
-    }
-})
-.reduce((total, person) => total + person.budget, 0)
-
-console.log(amount)
