@@ -1,153 +1,73 @@
-// const obj = {
-//     name: 'Vlad',
-//     age: 26,
-//     job: 'FullStack'
-// }
+const citiesRussia = ['Москва', 'Санкт-Петербург', 'Казань', 'Новосибирск']
+const citiesEurope = ['Берлин', 'Прага', 'Париж']
 
-// const entries = [
-//     ['name', 'Vlad'],
-//     ['age', 26],
-//     ['job', 'FullStack']
-// ]
+const citiesRussiaWithPopulation = {
+    Moscow: 20,
+    SaintPetersburg: 8,
+    Kazan: 5,
+    Novosibirsk: 3
+}
+const citiesEuropeWithPopulation = {
+    Moscow: 26,
+    Berlin: 10,
+    Praha: 3,
+    Paris: 2
+}
 
-// // console.log(Object.entries(obj))
-// // console.log(Object.fromEntries(entries))
+//spread
+// console.log(...citiesRussia)
 
-// const map = new Map(entries)
+// const allCities = [...citiesRussia, ...citiesEurope]
 
-// map.set('newField', 42)
-// .set(obj, 'Value of object')
-// .set(NaN, 'NaaaaaaaN')
-
-// // 
-
-// // map.delete('job')
-// // console.log(map.has('job'))
-// // console.log(map.size)
-// // map.clear()
-// // console.log(map.size)
-
-// // for(let [key, value] of map) {
-// //     console.log(key, value)
-// // }
-
-// // for (let val of map.values()) {
-// //     console.log(val)
-// // }
+// const allCities = citiesEurope.concat(citiesRussia)
+// console.log(allCities)
 
 
-// // for (let key of map.keys()) {
-// //     console.log(key)
-// // }
+    // console.log({...citiesRussiaWithPopulation})
+    // console.log({...citiesRussiaWithPopulation, ...citiesEuropeWithPopulation})
 
-// // map.forEach((val, key, m) => {
-// //     console.log(val, key)
-// // })
+    
+    //Practice
 
+    // const numbers = [5, 37, 42, 17]
 
+    // console.log(Math.max(5, 37, 42, 17))
 
-// // const array = Array.from(map)
+    // console.log(Math.max(...numbers))
+    // console.log(Math.max.apply(null, numbers))
 
-// // const mapObj = Object.fromEntries(map.entries())
+    // const divs = document.querySelectorAll('div')
+    // // console.log(divs)
 
-// // console.log(mapObj)
-
-// const users = [
-//     {name: 'Elena'},
-//     {name: 'Alex'},
-
-//     {name: 'Iryna'}
-
-// ]
-
-// const visits = new Map()
-
-//  visits
-//  .set(users[0], new Date())
-//  .set(users[1], new Date(new Date().getTime() + 1000 * 60))
-//  .set(users[2], new Date(new Date().getTime() + 5000 * 60))
-
-//  function lastVisit(user) {
-//     return visits.get(user)
-//  }
-
-//  console.log(lastVisit(users[1]))
-
-// const set = new Set([1, 2, 3, 3, 3, 4, 5, 5, 6])
-// set.add(10).add(20).add(30).add(20)
-
-// console.log(set.has(30))
-// console.log(set.size)
-// console.log(set.delete(1))
-// console.log(set.size)
-// console.log(set.clear())
-// console.log(set.size)
-
-// for (let keys of set) {
-//     console.log(key)
-// }
-
-// function uniqValues(array) {
-//     return Array.from(new Set(array))
-// }
-
-// console.log(uniqValues([1, 1, 2, 2, 4, 4, 4, 4, 5, 5, 6, 7]))
+    // const nodes = [...divs]
+    // console.log(nodes)
 
 
-// let obj = {name: 'weakmap'}
+    //Rest
+function sum(a, b, ...rest) {
+    return a + b + rest.reduce((a, i) => a + i, 0)
+}
 
-// const arr = [obj]
+const numbers = [1, 2, 4, 5, 6]
 
-// obj = null
-// console.log(obj)
+// console.log(sum(...numbers))
 
-// const map = new WeakMap([
-//     [obj, 'obj data']
-// ])
-// obj = null
+// const a = numbers[0]
+// const b = numbers[1]
 
-// const cache = new WeakMap()
+// const [a, b, ...other] = numbers
 
-// function cacheUser(user) {
-//     if (!cache.has(user)) {
-//         cache.set(user, Date.now())
-//     }
-//     return cache.get(user)
-// }
+// console.log(a, b, other)
 
-// let  lena = {name: 'Elena'}
-// let  alex = {name: 'Alex'}
+const person = {
+    name: 'Max',
+    age: 20,
+    city: 'Moscow',
+    country: 'Russia'
+}
 
-// cacheUser(lena)
-// cacheUser(alex)
-
-// lena = null
-
-// console.log(cache.has(lena))
-// console.log(cache.has(alex))
-
-
-
-//==========================
-
-
-const users = [
-    {name: 'Elena'},
-    {name: 'Alex'},
-    {name: 'Iryna'}
-
-]
-
-const visits = new WeakSet()
-
-visits.add(users[0]).add(users[1])
-
-users.splice(1, 1)
-
-console.log(visits.has(users[0]))
-console.log(visits.has(users[1]))
-
-
+const {name, age, ...address} = person
+console.log(name, age, address)
 
 
 
