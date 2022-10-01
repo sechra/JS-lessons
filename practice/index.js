@@ -1,74 +1,72 @@
-const citiesRussia = ['Москва', 'Санкт-Петербург', 'Казань', 'Новосибирск']
-const citiesEurope = ['Берлин', 'Прага', 'Париж']
+// function calcValues(a, b) {
+//     return [
+//         a + b,
+// a - b,
+//         a * b,
+//         a / b
+//     ]
+// }
 
-const citiesRussiaWithPopulation = {
-    Moscow: 20,
-    SaintPetersburg: 8,
-    Kazan: 5,
-    Novosibirsk: 3
-}
-const citiesEuropeWithPopulation = {
-    Moscow: 26,
-    Berlin: 10,
-    Praha: 3,
-    Paris: 2
-}
+// const [sum, sub = 'tttt', mult, ...other] = calcValues(42, 10)
 
-//spread
-// console.log(...citiesRussia)
-
-// const allCities = [...citiesRussia, ...citiesEurope]
-
-// const allCities = citiesEurope.concat(citiesRussia)
-// console.log(allCities)
+// const sum = result[0]
+// const sub = result[1]
 
 
-    // console.log({...citiesRussiaWithPopulation})
-    // console.log({...citiesRussiaWithPopulation, ...citiesEuropeWithPopulation})
 
-    
-    //Practice
+// 
 
-    // const numbers = [5, 37, 42, 17]
+// Objects
 
-    // console.log(Math.max(5, 37, 42, 17))
+// const person = {
+//     name: 'Max',
+//     age: 26,
+//     address: {
+//         country: 'Russia',
+//         city: 'Moscow'
+//     }
+// }
 
-    // console.log(Math.max(...numbers))
-    // console.log(Math.max.apply(null, numbers))
+// // const {name: firstName = 'Bez imeni', 
+// // age, 
+// // car = 'Mashini net',
+// // address: {city: homeTown, country}
+// // } = person
 
-    // const divs = document.querySelectorAll('div')
-    // // console.log(divs)
+// // const {name, ...info} = person
 
-    // const nodes = [...divs]
-    // console.log(nodes)
+// // console.log(name, info)
+
+// function logPerson({name: firstName = '111', age}) {
+//     console.log(firstName + ' ' + age)
+// }
+
+// logPerson(person)
 
 
-    //Rest
-function sum(a, b, ...rest) {
-    return a + b + rest.reduce((a, i) => a + i, 0)
-}
+const myNumber = 42
 
-const numbers = [1, 2, 4, 5, 6]
+// localStorage.removeItem('number')
 
-// console.log(sum(...numbers))
+// console.log(localStorage.getItem('number'))
+// localStorage.setItem('number', myNumber.toString())
+// console.log(localStorage.getItem('number'))
+// localStorage.clear()
 
-// const a = numbers[0]
-// const b = numbers[1]
-
-// const [a, b, ...other] = numbers
-
-// console.log(a, b, other)
-
-const person = {
-    name: 'Max',
-    age: 20,
-    city: 'Moscow',
-    country: 'Russia'
+const object = {
+    name: 'max',
+    age: 20
 }
 
-const {name, age, ...address} = person
-console.log(name, age, address)
+// localStorage.setItem('person', JSON.stringify(object))
+
+const raw = localStorage.getItem('person')
+const person = JSON.parse(raw)
+person.name = 'vlad'
+
+// console.log(person)
 
 
-
-
+window.addEventListener('storage', event => {
+    console.log(event)
+})
